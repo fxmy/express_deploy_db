@@ -5,7 +5,8 @@
   {mod, { express_deploy_db_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    sumo_db
    ]},
   {env,[]},
   {modules, []},
