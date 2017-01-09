@@ -33,7 +33,7 @@ ip(Account) when is_list(Account) ->
 
 %% @doc Returns the user_name of the given account.
 -spec user_name(account()) -> user_name().
-user_name(Account) when is_binary(Account) ->
+user_name(Account) when is_list(Account) ->
   get(user_name, Account).
 
 %% @doc Returns the current account's password.
