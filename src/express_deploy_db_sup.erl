@@ -20,7 +20,6 @@
 %%====================================================================
 
 start_link() ->
-  express_deploy_db:setup_db(),
   supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
 %%====================================================================
@@ -29,8 +28,11 @@ start_link() ->
 
 %% Child :: {Id,StartFunc,Restart,Shutdown,Type,Modules}
 init([]) ->
-    {ok, { {one_for_all, 0, 1}, []} }.
+    {ok, { {one_for_one, 0, 1}, [child()]} }.
 
 %%====================================================================
 %% Internal functions
 %%====================================================================
+child() ->
+  {express_deploy_db, {express_deploy_db, start_link, []},
+   permanent, 5000, worker, [express_deploy_db]}.
